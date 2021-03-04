@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import AddTaskModal from "../AddTaskModal/AddTaskModal";
 
-const Navigation = ({ addTask }) => {
+const Navigation = ({ addTask, taskList, addModalDisplay, toggleAddModal }) => {
   let d = new Date();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -31,28 +31,23 @@ const Navigation = ({ addTask }) => {
     monthName,
     day,
   };
-  const [toggleModal, setToggleModal] = useState(false);
-
-  const modalDisplay = () => {
-    setToggleModal(!toggleModal);
-    console.log(toggleModal);
-  };
 
   return (
     <React.Fragment>
-      <nav className="navbar is-spaced has-background-grey-darker">
-        <div className="navbar-start">
+      <nav className="navbar is-spaced has-background-grey-darker ">
+        <div className="navbar-start pl-4">
           <div className="navbar-item">
             <div className="infos">
               <h2 className="title is-4 has-text-white">{`${date.dayName}, ${date.monthName} ${date.day}`}</h2>
               <p className="subtitle is-6 has-text-info has-text-weight-bold">
-                3 Active Tasks
+                {taskList.filter((task) => task.isComplete === false).length}{" "}
+                Active Tasks
               </p>
             </div>
           </div>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end pr-4">
           <ul className="navbar-menu">
             <li>
               <Link to="/completed" className="navbar-item has-text-white link">
@@ -72,24 +67,26 @@ const Navigation = ({ addTask }) => {
         </div>
       </nav>
       <div className="navbar is-spaced has-background-grey-darker">
-        <div className="navbar-item navbar-start">
-          <div className=" breadcrumb" aria-label="breadcrumbs">
-            <ul>
-              <li>
-                <Link to="/" className="has-text-light">
-                  Home
-                </Link>
-              </li>
+        <div className="navbar-start pl-4">
+          <div className="navbar-item ">
+            <div className=" breadcrumb" aria-label="breadcrumbs">
+              <ul>
+                <li>
+                  <Link to="/" className="has-text-light">
+                    Home
+                  </Link>
+                </li>
 
-              <li className="is-active">
-                <span aria-current="page" className="has-text-grey ml-2">
-                  Overview
-                </span>
-              </li>
-            </ul>
+                <li className="is-active">
+                  <span aria-current="page" className="has-text-grey ml-2">
+                    Overview
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className=" navbar-end  ">
+        <div className=" navbar-end  pr-4">
           <div className="navbar-item">
             <div className="field">
               <p className="control has-icons-left">
@@ -110,13 +107,13 @@ const Navigation = ({ addTask }) => {
             </button>
           </div>
           <div className="navbar-item">
-            <button className="button is-primary" onClick={modalDisplay}>
+            <button className="button is-primary" onClick={addModalDisplay}>
               <i className="fa fa-plus fa-xs mr-2"></i>Create
             </button>
           </div>
         </div>
-        {toggleModal ? (
-          <AddTaskModal modalDisplay={modalDisplay} addTask={addTask} />
+        {toggleAddModal ? (
+          <AddTaskModal addModalDisplay={addModalDisplay} addTask={addTask} />
         ) : null}
       </div>
     </React.Fragment>
