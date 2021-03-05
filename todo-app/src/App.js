@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import uuid from "uuid/dist/v4";
 import "./App.css";
-
 import HomePage from "./HomePage/HomePage";
 import CompleteTasks from "./CompleteTasks/CompleteTasks";
 import IncompleteTasks from "./IncompleteTasks/IncompleteTasks";
@@ -42,7 +41,10 @@ function App() {
             <HomePage tasks={taskList} removetask={removetask} {...props} />
           )}
         />
-        <Route path="/completed" component={CompleteTasks} />
+        <Route
+          path="/completed"
+          render={(props) => <CompleteTasks {...props} />}
+        />
         <Route path="/incomplete" component={IncompleteTasks} />
       </Switch>
     </React.Fragment>

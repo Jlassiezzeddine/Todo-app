@@ -1,9 +1,6 @@
 import React from "react";
 import "./TaskCard.scss";
 const TaskCard = ({ task, editModalDisplay, removetask }) => {
-  const handleClick = () => {
-    removetask(task);
-  };
   return (
     <div className="column is-one-quarter">
       <div className="card">
@@ -22,7 +19,7 @@ const TaskCard = ({ task, editModalDisplay, removetask }) => {
           <div className="card-footer-item ">
             <i className="fa fa-edit mr-2"></i>
           </div>
-          <div className="card-footer-item " onClick={handleClick}>
+          <div className="card-footer-item " onClick={() => removetask(task)}>
             <i className="fa fa-trash-alt mr-2"></i>
           </div>
         </footer>

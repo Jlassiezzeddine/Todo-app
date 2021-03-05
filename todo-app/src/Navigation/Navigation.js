@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AddTaskModal from "../AddTaskModal/AddTaskModal";
 
 const Navigation = ({ addTask, taskList, addModalDisplay, toggleAddModal }) => {
+  const match = useLocation();
+  console.log(typeof match.pathname);
   let d = new Date();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -79,7 +82,7 @@ const Navigation = ({ addTask, taskList, addModalDisplay, toggleAddModal }) => {
 
                 <li className="is-active">
                   <span aria-current="page" className="has-text-grey ml-2">
-                    Overview
+                    {match.pathname.replace("/", "")}
                   </span>
                 </li>
               </ul>
