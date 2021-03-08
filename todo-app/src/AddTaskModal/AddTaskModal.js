@@ -86,7 +86,7 @@ const AddTaskModal = ({ addModalDisplay, addTask }) => {
           </form>
         </section>
         <footer className="modal-card-foot ">
-          <button className="button is-success " onClick={handleSubmit}>
+          <button className="button is-success " onClick={() => handleSubmit()}>
             Save
           </button>
           <button className="button is-pulled-right" onClick={addModalDisplay}>
